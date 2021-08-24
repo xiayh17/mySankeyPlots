@@ -5,6 +5,7 @@ library(plyr)
 library(dplyr)
 
 library(ggalluvial)
+library(Cairo)
 
 download.file("https://cdn.jsdelivr.net/gh/xiayh17/Figs@main/uPic/data_mini2_20210817.Rdata",
               "data_mini2_20210817.Rdata")
@@ -39,3 +40,8 @@ names(cols[[4]]) = c('0', '4', '6', '8', '2', '5', '7')
 names(cols[[5]]) = c('LCA', 'LUAD', 'LUSC')
 
 plotSankey(sankey_data,cols =cols,vcols = vcols)
+
+# save in pdf -------------------------------------------------------------
+Cairo(16000, 8000, file="plotSankey.pdf", type="pdf", bg="white",dpi = 300,units = "px")
+plotSankey(sankey_data,cols =cols,vcols = vcols)
+dev.off()
